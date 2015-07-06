@@ -1,9 +1,9 @@
 #! /bin/bash
 
+IFS=:
 while read data;do
-     file=${data%-*}
-     link=${data#*>}
-     path=${file%/*}
+     ary=($data)
+     path=${ary[3]%/*}
      [ ! -d "$path" ] && mkdir -p $path
-     ln -s $link $file
-done < log.txt
+     ln -s ${ary[4]} ${ary[3]}
+done < loglink.txt
